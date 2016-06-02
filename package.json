@@ -1,0 +1,22 @@
+{
+  "name": "myfirstapi",
+  "version": "1.0.0",
+  "description": "My first RESTApi",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.1",
+    "mysql": "^2.10.2",
+    "npm": "^2.15.1",
+    "q": "^1.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "API"
+  ],
+  "author": "Roman S.",
+  "license": "ISC"
+}
