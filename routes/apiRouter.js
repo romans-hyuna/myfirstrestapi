@@ -6,8 +6,9 @@ router.get('/api/tasks', function (req, res) {
     taskModel.getTasks(req, res, function (err, result) {
         if (err) {
             console.log(err);
-            res.json({'error': err.message});
+            return res.json({'error': err.message});
         }
+
         res.json({'response': result});
     });
 });
@@ -20,7 +21,8 @@ router.get('/api/tasks/:id', function (req, res) {
             res.json({'error': err.message});
         }
 
-        if (result.length == 0) {
+        // check if we can fint task by this id
+        if (Object.keys(result).length === 0) {
             response = 'cat find task by this id';
         }
 
@@ -32,7 +34,7 @@ router.post('/api/tasks/', function (req, res) {
     taskModel.createUser(req, res, function (err, result) {
         if (err) {
             console.log(err);
-            res.json({'error': err.message});
+            return res.json({'error': err.message});
         }
 
         res.json({'response': 'task was added to db'});

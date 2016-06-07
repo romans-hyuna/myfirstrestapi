@@ -1,7 +1,6 @@
 var mysql = require('mysql');
 
-function dbConnection ()
-{
+function dbConnection () {
     this.pool = mysql.createPool({
         host     : 'dev',
         user     : 'root',
@@ -13,17 +12,17 @@ function dbConnection ()
 dbConnection.prototype.query = function (query, callback){
     this.pool.getConnection(function(err, connection) {
         if (err) {
-            callback(err);
+            return callback(err);
         }
-        connection.query(query, function(err, rows) {
-            if(err){
-                callback(err);
-            }
 
-            connection.release();
-            callback(false, rows);
-        });
+            connection.query(query, function (err, rows) {
+                if (err) {
+                    return callback(err);
+                }
 
+                connection.release();
+                callback(false, rows);
+            });
     });
 }
 

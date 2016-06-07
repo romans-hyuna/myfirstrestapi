@@ -5,7 +5,7 @@ taskModel.getTasks = function(req, res, callback){
     var query = 'select * from roman_tasks';
     dbConn.query(query, function(err, result){
         if (err) {
-            callback(err);
+           return callback(err);
         }
         callback(false, result);
     });
@@ -35,7 +35,7 @@ taskModel.createUser = function(req, res, callback){
 
     dbConn.query(query, function(err, result){
         if (err) {
-            callback(err);
+            return callback(err);
         }
         callback(false, result);
     });
