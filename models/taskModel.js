@@ -39,7 +39,6 @@ var taskModel = {
         return this.getTaskById(req)
             .then(function(row){
                 if(!row) {
-                    console.log(1);
                     return {'msg': 'cant find task by this id', 'result': null}
                 }
 
