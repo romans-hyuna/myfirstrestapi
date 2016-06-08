@@ -6,7 +6,7 @@ function dbConnection () {
     this.pool = mysql.createPool({
         host     : 'dev',
         user     : 'root',
-        password : 'jomedia123',//i don't want to show you my pass :D
+        password : '******',//i don't want to show you my pass :D
         database: 'nodejs_test_db'
     });
 }
