@@ -3,62 +3,67 @@ var router = express.Router();
 var taskModel = require('../models/taskModel');
 
 router.get('/api/tasks', function (req, res) {
-    taskModel.getTasks(req, res, function (err, result) {
-        if (err) {
+    taskModel.getTasks()
+        .then(function(rows){
+            res.json({'response': rows});
+        })
+        .fail(function(err){
             console.log(err);
-            return res.json({'error': err.message});
-        }
-
-        res.json({'response': result});
-    });
+            res.json({'error': err.message});
+        });
 });
 
 router.get('/api/tasks/:id', function (req, res) {
-    taskModel.getUserById(req, res, function (err, result) {
-        var response = result;
-        if (err) {
+    taskModel.getTaskById(req)
+        .then(function(row){
+            res.json({'response': row});
+        })
+        .fail(function(err){
             console.log(err);
             res.json({'error': err.message});
-        }
-
-        // check if we can fint task by this id
-        if (Object.keys(result).length === 0) {
-            response = 'cat find task by this id';
-        }
-
-        res.json({'response': response});
-    });
+        })
 });
 
 router.post('/api/tasks/', function (req, res) {
-    taskModel.createUser(req, res, function (err, result) {
-        if (err) {
+    taskModel.createTask(req)
+        .then(function(response){
+            res.json({'response': {
+                'msg' : response.msg,
+                'result' : response.result
+            }});
+        })
+        .fail(function(err){
             console.log(err);
-            return res.json({'error': err.message});
-        }
-
-        res.json({'response': 'task was added to db'});
-    });
+            res.json({'error': err.message});
+        })
 });
 
 router.put('/api/tasks/:id', function (req, res) {
-    taskModel.updateUser(req, res, function (err, result) {
-        if (err) {
+    taskModel.updateTask(req)
+        .then(function(response){
+            res.json({'response': {
+                'msg' : response.msg,
+                'result' : response.result
+            }});
+        })
+        .fail(function(err){
             console.log(err);
             res.json({'error': err.message});
-        }
-        res.json({'response': 'user was updated successfully'});
-    })
+        })
 });
 
 router.delete('/api/tasks/:id', function (req, res) {
-    taskModel.deleteUser(req, res, function (err, result) {
-        if (err) {
+    taskModel.deleteTask(req)
+        .then(function(response){
+            res.json({'response': {
+                'msg' : response.msg,
+                'result' : response.result
+            }});
+        })
+        .fail(function(err){
             console.log(err);
             res.json({'error': err.message});
-        }
-        res.json({'response': 'user was deleted successfully'});
-    })
+        })
 });
 
 module.exports = router;
