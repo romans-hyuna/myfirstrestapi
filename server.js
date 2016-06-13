@@ -2,7 +2,6 @@
 
 var express = require('express');
 var apiRouter = require('./routes/apiRouter');
-var taskRouter = require('./routes/taskRouter');
 var bodyParser = require('body-parser');
 var app = express();
 
@@ -24,8 +23,6 @@ app.all('/', function (req, res) {
     res.send('my first api, pls use "url"/api/"router"');
 })
 
-//router for view
-app.use('/', taskRouter);
 //router for api
 app.use('/', apiRouter);
 
